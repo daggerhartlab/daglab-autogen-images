@@ -1,0 +1,14 @@
+{
+  "name": "daglab/wp-autogen-images",
+  "authors": [
+      {
+          "name": "Daggerhart Lab",
+          "email": "hello@daggerhartlab.com"
+      }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DagLabAutogenImages\\": "src/"
+    }
+  }
+}
