@@ -5,7 +5,7 @@
  * GitHub Plugin URI: daggerhartlab/daglab-autogen-images
  * Primary Branch: main
  * Description: Prevents creation of image derivative sizes until they are needed.
- * Version: 1.0.0
+ * Version: 1.0.2
  * Author: Daggerhart Lab
  * Author URI: https://daggerhartlab.com
  * License: GPL-3.0+
