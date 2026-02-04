@@ -18,12 +18,12 @@ class SettingsPage {
 			// Register menu item under "Network Admin > Settings" and render HTML for the page
 			add_action('network_admin_menu', [$self, 'registerMenuItem'], 100);
 			// Update settings when form is submitted
-			add_action('network_admin_edit_daglab_autogenerate_images_submit', [$self, 'SaveSettings']);
+			add_action('network_admin_edit_daglab_autogenerate_images_submit', [$self, 'saveSettings' ]);
 		} else {
 			// Register menu item under "Settings" for single site
 			add_action('admin_menu', [$self, 'registerMenuItem'], 100);
 			// Update settings when form is submitted
-			add_action('admin_post_daglab_autogenerate_images_submit', [$self, 'SaveSettings']);
+			add_action('admin_post_daglab_autogenerate_images_submit', [$self, 'saveSettings' ]);
 		}
 	}
 
@@ -34,7 +34,7 @@ class SettingsPage {
 	public function registerMenuItem(): void {
 		$plugin = \DagLabAutogenImages\Plugin::instance();
 		$parent_slug = is_multisite() ? 'settings.php' : 'options-general.php';
-		
+
 		add_submenu_page(
 			$parent_slug,
 			'Autogenerate Images',
@@ -53,7 +53,7 @@ class SettingsPage {
 		$plugin = \DagLabAutogenImages\Plugin::instance();
 		$is_active = $plugin->getOption('daglab_autogenerate_images', '0');
 		$is_multisite = is_multisite();
-		
+
 		// Determine form action URL based on environment
 		if ($is_multisite) {
 			$form_action = add_query_arg('action', 'daglab_autogenerate_images_submit', 'edit.php');
@@ -105,7 +105,7 @@ class SettingsPage {
 	 * Update settings when form is submitted and redirect back to settings page
 	 * @return void
 	 */
-	public function SaveSettings(): void {
+	public function saveSettings(): void {
 		// First, verify that we are being referred by a valid form submission with correct nonce
 		check_admin_referer( 'daglab_autogenerate_images_submit_nonce' );
 
