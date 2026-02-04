@@ -109,11 +109,11 @@ class ImageRequest {
 
 		$this->setPathData();
 
-		if($this->isImage) {
+		if ($this->isImage) {
 			$this->setThumbnailData();
 		}
 
-		if($this->isThumbnail) {
+		if ($this->isThumbnail) {
 			# This file contains the `wp_create_image_subsizes` and `image_resize_dimensions` functions
 			require_once ABSPATH . '/wp-admin/includes/image.php';
 
@@ -153,7 +153,7 @@ class ImageRequest {
 	private function setThumbnailData(): void {
 		$matches = [];
 
-		if(preg_match("/(.*)-(\d+)x(\d+)$/", $this->filename, $matches)) {
+		if (preg_match("/(.*)-(\d+)x(\d+)$/", $this->filename, $matches)) {
 			$this->parentFilename = $matches[1] ?? '';
 			$this->parentFilename = urldecode($this->parentFilename);
 			$this->width = (int) $matches[2] ?? '';
@@ -169,7 +169,7 @@ class ImageRequest {
 	 * @return void
 	 */
 	public function setFilepath(string $path = ''): void {
-		if($path) {
+		if ($path) {
 			$this->filepath = $path;
 			return;
 		}
@@ -229,7 +229,7 @@ class ImageRequest {
 		/**
 		 * If no attachment is found, try appending `-scaled` to the filename which happens for large images
 		 */
-		if(!$this->attachmentId) {
+		if (!$this->attachmentId) {
 			$parentFileUrl = sprintf('%s-scaled.%s',
 				join('/',
 					[
@@ -255,7 +255,7 @@ class ImageRequest {
 		 * editor to a smaller size that wouldn't have its own "Large" size thumbnail, WP keeps the original "Large" size
 		 * as an option that can be used when editing content.
 		 */
-		if(!$this->attachmentId) {
+		if (!$this->attachmentId) {
 			$filename = sanitize_text_field($this->filename);
 			$extension = sanitize_text_field($this->extension);
 
@@ -267,7 +267,7 @@ class ImageRequest {
 
 			$results = $wpdb->get_results($query);
 
-			if(count($results) === 1) {
+			if (count($results) === 1) {
 				$this->attachmentId = $results[0]->post_id;
 			}
 		}
@@ -284,7 +284,7 @@ class ImageRequest {
 		 * But the `-scaled` version works in place of the original because the aspect ratio is preserved when creating
 		 * the `-scaled` version, hence this substitution generates derivatives reliably and does save some disk space.
 		 */
-		if($this->attachmentId && !file_exists($this->parentFilepath)) {
+		if ($this->attachmentId && !file_exists($this->parentFilepath)) {
 
 			$scaledFilepath = sprintf('%s-scaled.%s',
 				join('/',
@@ -305,7 +305,7 @@ class ImageRequest {
 			 */
 			$scaledFilename = sprintf('%s-scaled.%s', $this->parentFilename, $this->extension);
 
-			if(file_exists($scaledFilepath)) {
+			if (file_exists($scaledFilepath)) {
 				# Copy the scaled file to the original file location
 				copy($scaledFilepath, $this->parentFilepath);
 
@@ -320,11 +320,11 @@ class ImageRequest {
 		/**
 		 * Attempt to correct parent filepath we have an attachment ID but parent filepath is not what we expect from the URL
 		 */
-		if(!file_exists($this->parentFilepath) && $this->attachmentId) {
+		if (!file_exists($this->parentFilepath) && $this->attachmentId) {
 			$this->parentFilepath = get_attached_file($this->attachmentId);
 		}
 
-		if(file_exists($this->parentFilepath)) {
+		if (file_exists($this->parentFilepath)) {
 			$imageSize = wp_getimagesize($this->parentFilepath);
 			$this->parentWidth = $imageSize[0] ?? 0;
 			$this->parentHeight = $imageSize[1] ?? 0;

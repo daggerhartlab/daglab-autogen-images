@@ -64,7 +64,7 @@ class SettingsPage {
 		<div class="wrap">
 			<h1>Autogenerate Images</h1>
 
-			<?php if(isset($_GET['settings-updated']) && $_GET['settings-updated'] === '1') { ?>
+			<?php if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === '1') { ?>
 				<div class="notice updated"><p>Settings updated</p></div>
 			<?php } ?>
 

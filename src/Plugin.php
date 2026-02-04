@@ -112,7 +112,7 @@ class Plugin {
 		 */
 		$plugin_features_enabled = $this->getOption('daglab_autogenerate_images', '0');
 
-		if($plugin_features_enabled !== '1') {
+		if ($plugin_features_enabled !== '1') {
 			return;
 		}
 
