@@ -11,9 +11,9 @@ class Plugin {
 
 	/**
 	 * Plugin singleton instance.
-	 * @var Plugin
+	 * @var Plugin|null
 	 */
-	protected static $instance;
+	protected static ?Plugin $instance = null;
 
 	/**
 	 * Plugin constructor.

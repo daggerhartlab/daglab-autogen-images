@@ -10,7 +10,7 @@ class ImageRequest {
 	 * The request URI that we are processing
 	 * @var string
 	 */
-	private string $requestUri;
+	private string $requestUri = '';
 
 	private array $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
@@ -33,39 +33,39 @@ class ImageRequest {
 	 * Ex. If the request URI is `/wp-content/uploads/2023/03/my-photo.jpg`, then $uploadsSubpath is `2023/03`
 	 * @var string
 	 */
-	private string $uploadSubpath;
+	private string $uploadSubpath = '';
 
 	/**
 	 * The part of the request URI between the subpath and extension
 	 * Ex. If the request URI is `/wp-content/uploads/2023/03/my-photo.jpg`, then $filename is `my-photo`
 	 * @var string
 	 */
-	private string $filename;
+	private string $filename = '';
 
 	/**
 	 * The parent filename that a thumbnail is generated from
 	 *  Ex. If the request URI is `/wp-content/uploads/2023/03/my-photo-300x200.jpg`, then $parentFilename is `my-photo`
 	 * @var string
 	 */
-	private string $parentFilename;
+	private string $parentFilename = '';
 
 	/**
 	 * The complete file path for the parent image for a given thumbnail request
 	 * @var string
 	 */
-	private string $parentFilepath;
+	private string $parentFilepath = '';
 
 	/**
 	 * The width of the parent image from which the requested thumbnail is generated
 	 * @var int
 	 */
-	private int $parentWidth;
+	private int $parentWidth = 0;
 
 	/**
 	 * The height of the parent image from which the requested thumbnail is generated
 	 * @var int
 	 */
-	private int $parentHeight;
+	private int $parentHeight = 0;
 
 	/**
 	 * The underlying attachment ID for the requested thumbnail image
@@ -78,27 +78,27 @@ class ImageRequest {
 	 *  Ex. If the request URI is `/wp-content/uploads/2023/03/my-photo-300x200.jpg`, then $width is `300`
 	 * @var int
 	 */
-	private int $width;
+	private int $width = 0;
 
 	/**
 	 * The height of the thumbnail being requested
 	 *  Ex. If the request URI is `/wp-content/uploads/2023/03/my-photo-300x200.jpg`, then $height is `200`
 	 * @var int
 	 */
-	private int $height;
+	private int $height = 0;
 
 	/**
 	 * The file extension part of the request URI
 	 * Ex. If the request URI is `/wp-content/uploads/2023/03/my-photo.jpg`, then $extension is `jpg`
 	 * @var string
 	 */
-	private string $extension;
+	private string $extension = '';
 
 	/**
 	 * The complete file path for the thumbnail being requested
 	 * @var string
 	 */
-	private string $filepath;
+	private string $filepath = '';
 
 	/**
 	 * ImageRequest constructor

@@ -31,7 +31,7 @@ class ThumbnailGenerator {
 	 * @see wp_create_image_subsizes()
 	 * @var array
 	 */
-	private array $metadata;
+	private array $metadata = [];
 
 	/**
 	 * Thumbnail generator constructor
