@@ -39,7 +39,7 @@ class AttachmentMetadata {
 	 */
 	public function wp_generate_attachment_metadata($metadata, $attachment_id, $mode): array {
 		// Make sure we are in the right context
-		if($mode != 'create') {
+		if ($mode != 'create') {
 			return $metadata;
 		}
 
@@ -62,7 +62,7 @@ class AttachmentMetadata {
 		$action = $_REQUEST['action'] ?? '';
 		$do = $_REQUEST['do'] ?? '';
 
-		if($action !== 'image-editor' || $do !== 'save') {
+		if ($action !== 'image-editor' || $do !== 'save') {
 			return $metadata;
 		}
 
@@ -83,22 +83,22 @@ class AttachmentMetadata {
 		$filepath = get_attached_file($attachment_id);
 		$dirname  = pathinfo( $filepath, PATHINFO_DIRNAME );
 
-		if(!$filepath || !$dirname) {
+		if (!$filepath || !$dirname) {
 			return;
 		}
 
-		if(empty($metadata['sizes'])) {
+		if (empty($metadata['sizes'])) {
 			return;
 		}
 
 		foreach($metadata['sizes'] as $sizeData) {
-			if(empty($sizeData['file'] || empty($sizeData['mime-type'] || ! str_starts_with($sizeData['mime-type'], 'image')))) {
+			if (empty($sizeData['file'] || empty($sizeData['mime-type'] || ! str_starts_with($sizeData['mime-type'], 'image')))) {
 				continue;
 			}
 
 			$subsizeFile = $dirname . '/' . $sizeData['file'];
 
-			if(file_exists($subsizeFile)) {
+			if (file_exists($subsizeFile)) {
 				unlink($subsizeFile);
 			}
 		}

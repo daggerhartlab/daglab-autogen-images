@@ -25,7 +25,7 @@ class WpSmushMediaImage {
 	 * @return bool
 	 */
 	public function filterWpSmushMediaImage($current, $key) {
-		if($key != 'full' && $key != 'wp_scaled') {
+		if ($key != 'full' && $key != 'wp_scaled') {
 			return false;
 		}
 		return $current;

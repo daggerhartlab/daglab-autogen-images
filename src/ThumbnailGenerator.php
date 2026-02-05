@@ -31,7 +31,7 @@ class ThumbnailGenerator {
 	 * @see wp_create_image_subsizes()
 	 * @var array
 	 */
-	private array $metadata;
+	private array $metadata = [];
 
 	/**
 	 * Thumbnail generator constructor
@@ -48,7 +48,7 @@ class ThumbnailGenerator {
 	public function generateThumbnail() {
 		$this->setThumbnailSize();
 
-		if(!$this->hasThumbnailSize()) {
+		if (!$this->hasThumbnailSize()) {
 			/**
 			 * Special case: The thumbnail dimensions requested are the same as the parent image dimensions.
 			 */
@@ -127,7 +127,7 @@ class ThumbnailGenerator {
 	 * @return string
 	 */
 	public function getFileSize() {
-		if(!file_exists($this->imageRequest->getFilepath())) {
+		if (!file_exists($this->imageRequest->getFilepath())) {
 			return 0;
 		}
 		return filesize($this->imageRequest->getFilepath());
@@ -139,12 +139,12 @@ class ThumbnailGenerator {
 	 */
 	private function maybeSmushImage() {
 		# Make sure we have identified a thumbnail size to be generated
-		if(!$this->hasThumbnailSize()) {
+		if (!$this->hasThumbnailSize()) {
 			return;
 		}
 
 		# Make sure `wp-smushit` plugin is active
-		if(!class_exists('WP_Smush') || !class_exists('Smush\Core\Media\Media_Item_Cache')) {
+		if (!class_exists('WP_Smush') || !class_exists('Smush\Core\Media\Media_Item_Cache')) {
 			return;
 		}
 
@@ -175,7 +175,7 @@ class ThumbnailGenerator {
 	 * @return bool
 	 */
 	public function filterWpSmushMediaImage($current, $key) {
-		if($key != $this->thumbnailSize['name']) {
+		if ($key != $this->thumbnailSize['name']) {
 			return false;
 		}
 		return true;
